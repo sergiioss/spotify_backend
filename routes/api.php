@@ -14,3 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/', function () {
+    return 'Bienvenid@ a mi E-commerce.';
+});
+
+

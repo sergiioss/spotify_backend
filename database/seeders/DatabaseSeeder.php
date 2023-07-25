@@ -24,11 +24,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            AlbumSeeder::class
+            ArtistSeeder::class
         ]);
 
         $this->call([
-            ArtistSeeder::class
+            AlbumSeeder::class
+        ]);
+        
+        $this->call([
+            SongSeeder::class
         ]);
 
         $this->call([
@@ -36,11 +40,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            SongSeeder::class
+            UserSeeder::class
         ]);
 
         $this->call([
-            UserSeeder::class
+            RoleUserSeeder::class
         ]);
     }
 }

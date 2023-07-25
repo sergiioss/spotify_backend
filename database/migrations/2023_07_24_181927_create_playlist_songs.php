@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('playlist_songs');
             $table->string('photo');
-            $table->unsignedBigInteger('song_id');
-
-            $table->foreign('song_id')->references('id')->on('songs')->onDelete('cascade');
+            $table->integer('songs');
 
             $table->timestamps();
         });

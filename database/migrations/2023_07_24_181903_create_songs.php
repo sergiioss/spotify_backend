@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('songs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('artist');
-            $table->string('album');
+            $table->unsignedBigInteger('artist_id');
+            $table->unsignedBigInteger('album_id');
             $table->string('photo');
 
-            $table->foreign('artist')->references('artist_id')->on('albums')->onDelete('cascade');
+            $table->foreign('artist_id')->references('artist_id')->on('albums')->onDelete('cascade');
+            $table->foreign('album_id')->references('id')->on('albums')->onDelete('cascade');
 
             $table->timestamps();
         });

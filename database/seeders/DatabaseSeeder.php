@@ -22,5 +22,25 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class
         ]);
+
+        $this->call([
+            AlbumSeeder::class
+        ]);
+
+        $this->call([
+            ArtistSeeder::class
+        ]);
+
+        $this->call([
+            PlaylistSongsSeeder::class
+        ]);
+
+        $this->call([
+            SongSeeder::class
+        ]);
+
+        $this->call([
+            UserSeeder::class
+        ]);
     }
 }

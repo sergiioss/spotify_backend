@@ -33,4 +33,8 @@ Route::group(["middleware" => "jwt.auth"], function () {
 /* --------------------- ArtistsController -------------------- */
 
 Route::get('/artists-all', [ArtistController::class, 'artistAll']);
-Route::post('/create-artist',[ArtistController::class, 'createArtist']);
+Route::group(["middleware" => "isAdmin"], function () {
+    Route::post('/create-artist',[ArtistController::class, 'createArtist']);
+    Route::put('/updated-artist/{id}', [ArtistController::class, 'updatedArtist']);
+    Route::delete('/delete-artist/{id}', [ArtistController::class, 'deleteArtist']);
+});

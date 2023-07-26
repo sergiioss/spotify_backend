@@ -20,7 +20,7 @@ class IsAdmin
     public function handle(Request $request, Closure $next)
     {
         $userId = auth()->user()->id;
-
+        
         $user = User::find($userId);
 
         $isAdmin = $user->roles->contains(self::ROLE_ADMIN);

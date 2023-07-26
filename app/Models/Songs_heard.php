@@ -16,6 +16,6 @@ class Songs_heard extends Model
 
     public function songs()
     {
-        return $this->hasMany(Songs::class);
+        return $this->hasMany(Song::class);
     }
 }

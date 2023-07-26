@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return 'Bienvenid@ Spotify Music.';
+    return 'Bienvenid@ a Spotify Music';
 });
 
 /* --------------------- AuthController -------------------- */
@@ -29,3 +30,7 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
+/* --------------------- ArtistsController -------------------- */
+
+Route::get('/artists-all', [ArtistController::class, 'artistAll']);
+Route::post('/create-artist',[ArtistController::class, 'createArtist']);

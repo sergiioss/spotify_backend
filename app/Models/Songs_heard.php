@@ -9,5 +9,13 @@ class Songs_heard extends Model
 {
     use HasFactory;
 
-    
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function songs()
+    {
+        return $this->hasMany(Songs::class);
+    }
 }

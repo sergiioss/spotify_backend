@@ -83,9 +83,9 @@ class AlbumsController extends Controller
 
             $validator = Validator::make($request->all(),[
                 'name'=> 'string',
-                'surnames' => 'string',
-                'nationality' => 'string',
-                'photo' => 'string'
+                'artist_id' => 'integer',
+                'release_date' => 'string',
+                'photo' => 'string',
             ]);
 
             if($validator->fails()){
@@ -95,53 +95,62 @@ class AlbumsController extends Controller
                 ],400);
             };
 
-            $artist = Artist::query()
-            ->where('id', $id)
-            ->find($id);
+            $artist_id = $request->input('artist_id');
 
-            if(!$artist){
+            $artist_exist = Artist::find($artist_id);
+
+            if($artist_exist === null){
+                return response()->json(
+                    [
+                        'message' => "Don't exist Artist_id"
+                    ]
+                );
+            }
+
+            $updatedAlbum = Albums::find($id);
+            
+            if(!isset($updatedAlbum->id)){
                 return response()->json(
                     [
                         'success' => true,
-                        'message'=> 'Error'
+                        'message'=> "There is no such album to update"
                     ]
                     );
             }
 
             $name = $request->input('name');
-            $surnames = $request->input('surnames');
-            $nationality = $request->input('nationality');
+            $release_date = $request->input('release_date');
             $photo = $request->input('photo');
+
+            if (isset($name)) {
+                $updatedAlbum->name = $name;
+            }
+
+            if (isset($release_date)) {
+                $updatedAlbum->release_date = $release_date;
+            }
+
+            if (isset($artist_id)) {
+                $updatedAlbum->artist_id = $artist_id;
+            }
+
+            if (isset($photo)) {
+                $updatedAlbum->photo = $photo;
+            }
             
-            if(isset($name)){
-                $artist->name = $name;
-            };
-
-            if(isset($surnames)){
-                $artist->surnames = $surnames;
-            };
-
-            if(isset($nationality)){
-                $artist->nationality = $nationality;
-            };
-
-            if(isset($photo)){
-                $artist->photo = $photo;
-            };
-
-            $artist->save();
+            $updatedAlbum->save();
 
             return response()->json([
                 'success'=> true,
-                'message'=> "Artist " .$artist->name." ".$artist->surnames. " updated"
+                'message'=> "Album " .$updatedAlbum->name." ".$updatedAlbum->artist_id. " updated"
             ],200);
 
         }catch(\Exception $exception){
-            Log::error('Error updated artist' . $exception->getMessage());
+            Log::error('Error updated album' . $exception->getMessage());
             return response()->json(
                 [
                     'success' => false,
-                    'message' => 'Error updated artist'
+                    'message' => 'Error updated album'
                 ],500
             );
         }

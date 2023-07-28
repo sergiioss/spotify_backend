@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumsController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ Route::get('/', function () {
     return 'Bienvenid@ a Spotify Music';
 });
 
-/* --------------------- AuthController -------------------- */
+/* --------------------- Auth Controller -------------------- */
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::group(["middleware" => "jwt.auth"], function () {
@@ -30,11 +31,29 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-/* --------------------- ArtistsController -------------------- */
+/* ------------------- Users Controller ------------------ */
+
+Route::group(["middleware" => ["jwt.auth", "isMaster"]], function () {
+    /* ------------------------- ADMIN ---------------------- */
+    Route::post('/user/add_admin/{id}', [UserController::class, 'rolAdmin']);
+    Route::delete('/user/delete_admin/{id}', [UserController::class, 'deleteRolAdmin']);
+    /* ---------------------- SUPER ADMIN -------------------- */
+    Route::post('/user/super_admin/{id}', [UserController::class, 'rolSuperAdmin']);
+    Route::delete('/user/delete_super_admin/{id}', [UserController::class, 'deleteRolSuperAdmin']);
+});
+
+/* --------------------- Artists Controller -------------------- */
 
 Route::get('/artists-all', [ArtistController::class, 'artistAll']);
 Route::group(["middleware" => "isAdmin"], function () {
     Route::post('/create-artist',[ArtistController::class, 'createArtist']);
     Route::put('/updated-artist/{id}', [ArtistController::class, 'updatedArtist']);
     Route::delete('/delete-artist/{id}', [ArtistController::class, 'deleteArtist']);
+});
+
+/* --------------------- Albums Controller -------------------- */
+
+Route::group(["middleware" => "isAdmin"], function () {
+    Route::post('/create-album',[AlbumsController::class, 'createAlbum']);
+    Route::put('/updated-album/{id}',[AlbumsController::class, 'updatedAlbum']);
 });

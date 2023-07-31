@@ -56,4 +56,6 @@ Route::group(["middleware" => "isAdmin"], function () {
 Route::group(["middleware" => "isAdmin"], function () {
     Route::post('/create-album',[AlbumsController::class, 'createAlbum']);
     Route::put('/updated-album/{id}',[AlbumsController::class, 'updatedAlbum']);
+    Route::post('/delete-album/{id}',[AlbumsController::class, 'deleteAlbum']);
+    Route::get('/show-albums',[AlbumsController::class, 'showAlbums']);
 });

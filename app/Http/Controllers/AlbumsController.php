@@ -95,29 +95,18 @@ class AlbumsController extends Controller
                 ],400);
             };
 
-            $artist_id = $request->input('artist_id');
-
-            $artist_exist = Artist::find($artist_id);
-
-            if($artist_exist === null){
-                return response()->json(
-                    [
-                        'message' => "Don't exist Artist_id"
-                    ]
-                );
-            }
-
             $updatedAlbum = Albums::find($id);
-            
+                
             if(!isset($updatedAlbum->id)){
                 return response()->json(
                     [
-                        'success' => true,
+                        'sucess' => true,
                         'message'=> "There is no such album to update"
                     ]
-                    );
+                );
             }
-
+                    
+            $artist_id = $request->input('artist_id');
             $name = $request->input('name');
             $release_date = $request->input('release_date');
             $photo = $request->input('photo');
@@ -131,6 +120,15 @@ class AlbumsController extends Controller
             }
 
             if (isset($artist_id)) {
+            $artist_exist = Artist::find($artist_id);
+            
+            if($artist_exist === null){
+                return response()->json(
+                    [
+                        'message' => "Don't exist Artist_id"
+                        ]
+                    );
+                }
                 $updatedAlbum->artist_id = $artist_id;
             }
 
@@ -155,4 +153,55 @@ class AlbumsController extends Controller
             );
         }
     }
+
+    public function deleteAlbum($id){
+        try{
+            Log::info('Delete a album');
+
+            $album = Albums::query()
+            ->where('id', $id)
+            ->find($id);
+
+            if(!$album){
+                return response()->json([
+                    'success'=> true,
+                    'message'=> 'Album does not exists'
+                ],404);
+            }
+
+            $album->delete();
+
+            return response()->json([
+                'success'=>true,
+                'message'=> 'Album ' .$album->name.' deleted'
+            ],200);
+
+        }catch(\Exception $exception){
+            Log::error('Error delete product' . $exception->getMessage());
+            return response()->json(
+                [
+                    'success'=> false,
+                    'message'=> 'Error delete product'
+                ],500);
+        }
+    }
+
+    public function showAlbums()
+    {
+        try {
+            Log::info('Getting all albums');
+
+            $artist = Albums::get();
+
+            return $artist;
+
+        } catch (\Exception $exception) {
+            Log::error('Album information error' . $exception->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Album information error'
+            ], 500);
+        }
+    }
+
 }

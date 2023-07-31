@@ -42,6 +42,10 @@ class SongsController extends Controller
             $song->artist_id = $artist_id;
             
             if(isset($album_id)){
+                $album_exist = Albums::find($album_id);
+                if($album_exist === null){
+                    return response()->json(['error' => 'Error Album does not exist'], 500);
+                }
                 $song->album_id = $album_id;
             }
             
@@ -59,7 +63,6 @@ class SongsController extends Controller
             $song->save();
 
             $song->albums()->attach($album_id);
-            
 
             return response()->json ([
                 'success'=> true,

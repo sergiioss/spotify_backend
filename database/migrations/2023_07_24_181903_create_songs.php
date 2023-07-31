@@ -18,8 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('album_id');
             $table->string('photo');
 
-            $table->foreign('artist_id')->references('artist_id')->on('albums')->onDelete('cascade');
-            $table->foreign('album_id')->references('id')->on('albums')->onDelete('cascade');
+            $table->foreign('artist_id')->references('id')->on('artists')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -14,8 +14,4 @@ class Artist extends Model
         return $this->hasMany(Song::class);
     }
 
-    public function albums()
-    {
-        return $this->hasMany(Albums::class);
-    }
 }

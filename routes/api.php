@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumsController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SongsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -58,4 +59,13 @@ Route::group(["middleware" => "isAdmin"], function () {
     Route::put('/updated-album/{id}',[AlbumsController::class, 'updatedAlbum']);
     Route::post('/delete-album/{id}',[AlbumsController::class, 'deleteAlbum']);
     Route::get('/show-albums',[AlbumsController::class, 'showAlbums']);
+});
+
+/* --------------------- Songs Controller -------------------- */
+
+Route::group(["middleware" => "isAdmin"], function () {
+    Route::post('/create-song',[SongsController::class, 'createSong']);
+   /*  Route::put('/updated-album/{id}',[AlbumsController::class, 'updatedAlbum']);
+    Route::post('/delete-album/{id}',[AlbumsController::class, 'deleteAlbum']);
+    Route::get('/show-albums',[AlbumsController::class, 'showAlbums']); */
 });

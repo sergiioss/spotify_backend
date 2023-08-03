@@ -84,7 +84,5 @@ Route::group(["middleware" => "isAdmin"], function () {
 
 Route::group(["middleware" => "isAdmin"], function () {
     Route::post('/create-list-song-heard',[Songs_heardController::class, 'createListSongsHeard']);
-    /* Route::put('/updated-song/{id}',[SongsController::class, 'updatedSong']);
-    Route::delete('/delete-song/{id}',[SongsController::class, 'deleteSong']);
-    Route::get('/show-songs',[SongsController::class, 'showSongs']); */
+    Route::get('/show-songs-heard',[Songs_heardController::class, 'showSongsHeards']);
 });

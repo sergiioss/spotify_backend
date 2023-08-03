@@ -65,7 +65,25 @@ Route::group(["middleware" => "isAdmin"], function () {
 
 Route::group(["middleware" => "isAdmin"], function () {
     Route::post('/create-song',[SongsController::class, 'createSong']);
-   /*  Route::put('/updated-album/{id}',[AlbumsController::class, 'updatedAlbum']);
-    Route::post('/delete-album/{id}',[AlbumsController::class, 'deleteAlbum']);
-    Route::get('/show-albums',[AlbumsController::class, 'showAlbums']); */
+    Route::put('/updated-song/{id}',[SongsController::class, 'updatedSong']);
+    Route::delete('/delete-song/{id}',[SongsController::class, 'deleteSong']);
+    Route::get('/show-songs',[SongsController::class, 'showSongs']);
+});
+
+/* --------------------- Playlist_songs Controller -------------------- */
+
+Route::group(["middleware" => "isAdmin"], function () {
+    Route::post('/create-song',[SongsController::class, 'createSong']);
+    Route::put('/updated-song/{id}',[SongsController::class, 'updatedSong']);
+    Route::delete('/delete-song/{id}',[SongsController::class, 'deleteSong']);
+    Route::get('/show-songs',[SongsController::class, 'showSongs']);
+});
+
+/* --------------------- Songs_heards Controller -------------------- */
+
+Route::group(["middleware" => "isAdmin"], function () {
+    Route::post('/create-song',[SongsController::class, 'createSong']);
+    Route::put('/updated-song/{id}',[SongsController::class, 'updatedSong']);
+    Route::delete('/delete-song/{id}',[SongsController::class, 'deleteSong']);
+    Route::get('/show-songs',[SongsController::class, 'showSongs']);
 });

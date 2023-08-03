@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumsController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Songs_heardController;
 use App\Http\Controllers\SongsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -72,18 +73,18 @@ Route::group(["middleware" => "isAdmin"], function () {
 
 /* --------------------- Playlist_songs Controller -------------------- */
 
-Route::group(["middleware" => "isAdmin"], function () {
+/* Route::group(["middleware" => "isAdmin"], function () {
     Route::post('/create-song',[SongsController::class, 'createSong']);
     Route::put('/updated-song/{id}',[SongsController::class, 'updatedSong']);
     Route::delete('/delete-song/{id}',[SongsController::class, 'deleteSong']);
     Route::get('/show-songs',[SongsController::class, 'showSongs']);
-});
+}); */
 
 /* --------------------- Songs_heards Controller -------------------- */
 
 Route::group(["middleware" => "isAdmin"], function () {
-    Route::post('/create-song',[SongsController::class, 'createSong']);
-    Route::put('/updated-song/{id}',[SongsController::class, 'updatedSong']);
+    Route::post('/create-list-song-heard',[Songs_heardController::class, 'createListSongsHeard']);
+    /* Route::put('/updated-song/{id}',[SongsController::class, 'updatedSong']);
     Route::delete('/delete-song/{id}',[SongsController::class, 'deleteSong']);
-    Route::get('/show-songs',[SongsController::class, 'showSongs']);
+    Route::get('/show-songs',[SongsController::class, 'showSongs']); */
 });

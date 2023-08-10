@@ -36,15 +36,19 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            PlaylistSongsSeeder::class
-        ]);
-
-        $this->call([
             UserSeeder::class
         ]);
-
+        
         $this->call([
             RoleUserSeeder::class
+        ]);
+        
+        $this->call([
+            PlaylistSeeder::class
+        ]);
+        
+        $this->call([
+            PlaylistSongsSeeder::class
         ]);
     }
 }

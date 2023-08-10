@@ -14,15 +14,15 @@ class PlaylistSongsSeeder extends Seeder
     public function run(): void
     {
         DB::table('playlist_songs')->insert([
-            'playlist_songs' => 'Pop Music',
+            'playlist_songs' => 1,
             'photo' => 'https://previews.123rf.com/images/stuartphoto/stuartphoto1607/stuartphoto160700760/61305854-pop-songs-significado-populares-de-m%C3%BAsica-y-sonido.jpg',
-            'songs' => 1
+            'songs_id' => 1
         ]);
 
         DB::table('playlist_songs')->insert([
-            'playlist_songs' => 'Rap',
+            'playlist_songs' => 2,
             'photo' => 'https://cdn.w600.comps.canstockphoto.es/el-p%C3%B3ster-del-concierto-de-rap-clipart-vectorial_csp38569751.jpg',
-            'songs' => 2
+            'songs_id' => 2
         ]);
     }
 }
